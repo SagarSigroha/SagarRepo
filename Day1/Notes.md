@@ -1,4 +1,4 @@
-Day 1 – Introduction to p5.js
+Day 1
 
 Today was my first time ever coding, and we got introduced to p5.js. It was really fun because we made emojis in class using simple shapes. I made a heart emoji and was super excited to see it come to life on screen.
 

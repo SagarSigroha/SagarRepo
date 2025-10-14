@@ -5,6 +5,7 @@ function setup() {
 
 function draw() {
  background(200);
+ 
  for(let i=0; i<flowers.length; i++ )
  {
 flowers[i].drawFlower();
