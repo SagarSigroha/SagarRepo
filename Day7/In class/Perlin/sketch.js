@@ -1,11 +1,32 @@
+let flowers = [];
 function setup() {
-  createCanvas(400, 400);
-  }
+  createCanvas(innerWidth, innerHeight);
+}
 
 function draw() {
- background(200);
- let noiseValue = noise(0.01*frameCount + 1000);
- let noiseMapped = map(noise,0,1 ,10,200);
-ellipse(width/2, hight/2, noiseMapped)
+  background(220);
+  for(let i =0;i<flowers.length;i++) {
+    //check if the current mX and mY is on the flower
+    flowers[i].checkMousePosition(mouseX, mouseY);
 
+    //check collision with ALL other flowers
+    for(let j = 0;j<flowers.length;j++) {
+      if(i!=j) {
+        flowers[i].checkCollision(flowers[j]);
+      }
+      
+    }
+    
+
+    //moves and draws the flower
+    flowers[i].moveFlower();
+    flowers[i].drawFlower();
+  }
 }
+
+
+function mousePressed() {
+  let tempFlower = new Flower(mouseX, mouseY, random(-10,10), random(-10,10));
+  flowers.push(tempFlower);
+}
+
