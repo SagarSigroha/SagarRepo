@@ -5,9 +5,9 @@ function setup() {
   gBall = new Ball(width / 2, height / 2, 5, 5);
 
   let pWidth = 10, pHeight = 100;
-  lPaddle = new paddle(0, height / 2 - pHeight/2, pHeight, pWidth, 5);
+  lPaddle = new paddle(0, height / 2 - pHeight / 2, pHeight, pWidth, 5);
 
-  rPaddle = new paddle(width - pWidth, height / 2 - pHeight/2, pHeight, pWidth, 5);
+  rPaddle = new paddle(width - pWidth, height / 2 - pHeight / 2, pHeight, pWidth, 5);
 }
 
 function draw() {
@@ -21,11 +21,11 @@ function draw() {
   gBall.show();
 
   let point = gBall.checkWinner();
-  if(point == 1) {
+  if (point == 1) {
     player1++;
     gBall.reset();
     console.log("p1 vs p2 :" + player1 + " " + player2)
-  } else if(point ==2 ) {
+  } else if (point == 2) {
     player2++;
     gBall.reset();
     console.log("p1 vs p2 :" + player1 + " " + player2)
@@ -34,24 +34,24 @@ function draw() {
   lPaddle.show();
   rPaddle.show();
 
-//if keys UP and DOWN are pressed move the right paddle
+  //if keys UP and DOWN are pressed move the right paddle
 
-if(keyIsDown(UP_ARROW)){
+  if (keyIsDown(UP_ARROW)) {
 
-  rPaddle.moveUp();
-} else if(keyIsDown(DOWN_ARROW)){
+    rPaddle.moveUp();
+  } else if (keyIsDown(DOWN_ARROW)) {
 
-  rPaddle.moveDown();
-}
+    rPaddle.moveDown();
+  }
 
-//if keys W and s are pressed move the left paddle
+  //if keys W and s are pressed move the left paddle
 
-if(keyIsDown(87)){
+  if (keyIsDown(87)) {
 
-  lPaddle.moveUp();
-} else if(keyIsDown(83)){
+    lPaddle.moveUp();
+  } else if (keyIsDown(83)) {
 
-  lPaddle.moveDown();
-}
+    lPaddle.moveDown();
+  }
 
 }
