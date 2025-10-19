@@ -1,4 +1,4 @@
-let gameState = "intro"; // intro, info, game, win
+let gameState = "intro"; 
 let petals = [];
 let enemies = [];
 let introImg, infoImg, winImg;
@@ -25,14 +25,14 @@ function setup() {
   noCursor();
   if (!bgSound.isPlaying()) {
     bgSound.loop();
-    bgSound.setVolume(1); // adjust volume (0–1)
+    bgSound.setVolume(1); 
   }
 }
 
 function draw() {
   background(0);
 
-  // --- Background ---
+  
   if (gameState == "intro") {
     if (introImg) image(introImg, 0, 0, width, height);
       }
@@ -71,7 +71,7 @@ function draw() {
       if (!p.collected && dist(mouseX, mouseY, p.x, p.y) < 25) p.collected = true;
     }
 
-    // Enemies
+    //Enemies
     for (let e of enemies) {
       e.move();
       e.display();
