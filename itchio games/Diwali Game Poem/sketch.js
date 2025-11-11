@@ -1,3 +1,4 @@
+let loading = true;
 let buildings = [];
 let numBuildings = 10;
 let scrollX = 0;
@@ -40,21 +41,51 @@ let soundIndex = 0;
 let soundOrder = [];
 
 // -------------------- PRELOAD --------------------
+
+let audioEnabled = false;
+
+function enableAudio() {
+  if (audioEnabled) return;
+  try {
+    userStartAudio().then(() => {
+      if (bgMusic && !bgMusic.isPlaying()) bgMusic.play();
+      if (crackers && !crackers.isPlaying()) crackers.play();
+      audioEnabled = true;
+    });
+  } catch(e) {
+    if (bgMusic && !bgMusic.isPlaying()) bgMusic.play();
+    if (crackers && !crackers.isPlaying()) crackers.play();
+    audioEnabled = true;
+  }
+}
+
+
 function preload() {
   serifFont = 'Georgia';
   sansFont = 'Helvetica';
 
-  soundFormats('mp3'); // all mp3
+  soundFormats('mp3');
 
-  bgMusic = loadSound('props/bg.mp3');
-  crackers = loadSound('props/crackers.mp3'); // 
-  footstep = loadSound('props/footstep.mp3');
+  // Load sounds
+  bgMusic = loadSound('props/bg.mp3', checkIfLoaded);
+  crackers = loadSound('props/crackers.mp3', checkIfLoaded);
+  footstep = loadSound('props/footstep.mp3', checkIfLoaded);
 
-  // load all 14 family sounds
   for (let i = 1; i <= 14; i++) {
-    familySounds.push(loadSound('props/s' + i + '.mp3'));
+    familySounds.push(loadSound('props/s' + i + '.mp3', checkIfLoaded));
   }
 }
+
+// count loaded items
+let totalToLoad = 17; // 1 bg + 1 crackers + 1 footstep + 14 family sounds
+let loadedCount = 0;
+function checkIfLoaded() {
+  loadedCount++;
+  if (loadedCount >= totalToLoad) {
+    loading = false;
+  }
+}
+
 
 // -------------------- SETUP --------------------
 function setup() {
@@ -81,14 +112,19 @@ function setup() {
 
   soundOrder = shuffle(Array.from(Array(14).keys()));
 
-  // play background + crackers
+    // play background + crackers
   bgMusic.setLoop(true);
-  bgMusic.setVolume(0.3); // softer
-  bgMusic.play();
-
+  bgMusic.setVolume(0.3);
   crackers.setLoop(true);
-  crackers.setVolume(0.2); // faint background
-  crackers.play();
+  crackers.setVolume(0.2);
+
+  // try autoplay once (may be blocked, overlay will handle otherwise)
+  try {
+    bgMusic.play();
+    crackers.play();
+    audioEnabled = true;
+  } catch (e) {}
+
 
   // reduce all family sounds to half volume
   for (let s of familySounds) s.setVolume(0.5);
@@ -96,11 +132,23 @@ function setup() {
 
 // -------------------- DRAW --------------------
 function draw() {
+  // --- show loading screen before game starts ---
+  if (loading) {
+    background(0);
+    fill(255, 200 + sin(frameCount * 0.1) * 55); // pulsing effect
+    textAlign(CENTER, CENTER);
+    textSize(28);
+    text("Loading...", width / 2, height / 2);
+    return; // stop draw loop until everything loaded
+  }
+
+  // after loading done, continue game normally
   if (introActive) {
     drawIntro();
     return;
   }
 
+   
   drawSky();
 
   if (random() < 0.03)

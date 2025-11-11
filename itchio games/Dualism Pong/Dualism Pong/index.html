@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dualism Pong</title>
+
+    <!-- Load p5.js and p5.sound -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/addons/p5.sound.min.js"></script>
+
+    <!-- Page style -->
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: black;
+        overflow: hidden;
+      }
+      canvas {
+        display: block;
+      }
+      #loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: Arial, sans-serif;
+        color: white;
+        font-size: 24px;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Loading screen -->
+    <div id="loading">Loading... Please wait</div>
+
+    <!-- Your game code -->
+    <script src="sketch.js"></script>
+
+    <!-- Small script to hide loading message when ready -->
+    <script>
+      // p5 calls setup() when the sketch is ready
+      window.setup = (function(originalSetup) {
+        return function() {
+          document.getElementById("loading").style.display = "none";
+          if (originalSetup) originalSetup();
+        };
+      })(window.setup);
+    </script>
+  </body>
+</html>
