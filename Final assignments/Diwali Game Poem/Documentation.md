@@ -2,7 +2,7 @@ Game Poem Concept Note : Windows of Light
 
 Observations
 
-During Diwali, I was struck by the contrast between brightness and solitude. As lights filled the city, I noticed how each glowing window carried a silent story... families laughing, rituals unfolding, and warm sounds spilling into the street. I recorded these moments: the crackle of crackers, the hum of voices, the soft footsteps of someone walking home alone. What moved me most was how light seemed to bridge distance connecting strangers through a shared sense of warmth and memory.
+During Diwali, I was struck by the contrast between brightness and solitude. As lights filled the city, I noticed how each glowing window carried a silent story... families laughing, rituals unfolding, and warm sounds spilling into the street. I recorded these moments: the crackle of crackers, the hum of voices. What moved me most was how light seemed to bridge distance connecting strangers through a shared sense of warmth and memory.
 
 Game Poem Concept
 
